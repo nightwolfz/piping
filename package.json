@@ -1,6 +1,6 @@
 {
   "name": "piping2",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Keep your code piping hot! Live code reloading now with transpiler support!",
   "main": "lib/piping.js",
   "dependencies": {
