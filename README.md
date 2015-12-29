@@ -1,4 +1,4 @@
-# Piping
+# Piping2
 
 There are already node "wrappers" that handle watching for file changes and restarting your application (such as [node-supervisor](https://github.com/isaacs/node-supervisor)), as well as reloading on crash, but I wasn't fond of having that.
 Piping adds "hot reloading" functionality to node, watching all your project files and reloading when anything changes, without requiring a "wrapper" binary.
@@ -22,14 +22,7 @@ if (require("piping")()) {
   app.listen(3000);
 }
 ```
-or in coffeescript:
-```coffee
-if require("piping")()
-  # application logic here
-  express = require "express"
-  app = express()
-  app.listen 3000
-```
+
 This if condition is necessary because your file will be invoked twice, but should only actually do anything the second time, when it is spawned as a separate node process, supervised by piping. Piping returns true when its good to go.
 
 the function returned by piping also accepts an options object. The following options are supported:
@@ -37,7 +30,7 @@ the function returned by piping also accepts an options object. The following op
 - __hook__ _(true/false)_: Whether to hook into node's "require" function and only watch required files. Defaults to false, which means piping will watch all the files in the folder in which main resides. The require hook can only detect files required after invoking this module!
 - __includeModules__ _(true/false)_: Whether to include required files than reside in node_modules folders. Defaults to false. Only has an effect when hook is true. For ignoring node_modules when hook is false, please use ignore.
 - __ignore__ _(regex)_: Files/paths matching this regex will not be watched. Defaults to `/(\/\.|~$)/`
-- __language__ _(string)_: The name of a module that will be required before your main is invoked. This allows for "coffee-script" to be specified to support a coffeescript main, launchable though "coffee". Probably works for other languages as well. Coffeescripters don't actually need this, as coffee-script is required automatically if main is a .coffee file.
+- __languages__ _(array)_: Array of module names that will be required before your main is invoked. Ex:`['babel-core/register', 'babel-polyfill']`.
 - __usePolling__ _(true/false)_ : From chokidar. Default false. Whether to use fs.watchFile (backed by polling), or fs.watch. It is typically necessary to set this to true to successfully watch files over a network.
 - __interval__ _(true/false)_ : From chokidar. Polling specific. Interval of file system polling (default 100).
 - __binaryInterval__ _(true/false)_ : From chokidar. Polling specific. Interval of file system polling for binary files.
@@ -45,9 +38,11 @@ the function returned by piping also accepts an options object. The following op
 
 Example:
 ```javascript
-if (require("piping")({main:"./app/server.js",hook:true})){
-  // app logic
-}
+require("piping")({
+    main: "./app/server.js",
+    hook: false,
+    languages: ['babel-core/register', 'babel-polyfill']
+})
 ```
 Piping can also be used just by passing a string. In this case, the string is taken to be the "main" option:
 ```javascript
@@ -61,8 +56,4 @@ One negative of all the examples above is the extra indent added to your code. T
 if (!require("piping")()) { return; }
 // application logic here
 ```
-or in coffeescript:
-```coffee
-if not require("piping")() then return
-# application logic here
-```
+

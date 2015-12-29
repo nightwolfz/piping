@@ -1,22 +1,19 @@
 {
-  "name": "piping",
-  "version": "0.3.0",
-  "description": "Keep your code piping hot! Live code reloading without additional binaries",
+  "name": "piping2",
+  "version": "0.4.0",
+  "description": "Keep your code piping hot! Live code reloading now with transpiler support!",
   "main": "lib/piping.js",
   "dependencies": {
     "chokidar": "^1.1.0",
-    "colors": "1.0.x"
+    "colors": "1.1.x"
   },
-  "devDependencies": {
-    "coffee-script": "~1.6.0"
-  },
-  "repository": "git://github.com/mdlawson/piping.git",
+  "repository": "git://github.com/nightwolfz/piping.git",
   "keywords": [
     "live",
     "code",
     "reload",
     "hot"
   ],
-  "author": "Michael Lawson",
+  "author": "Michael Lawson & Ryan Megidov",
   "license": "MIT"
 }
