@@ -9,13 +9,13 @@ Also check out [piping-browser](http://github.com/mdlawson/piping-browser) which
 
 ## Installation
 ```
-npm install piping
+npm install piping2
 ```
 ## Usage
 
 Piping is not a binary, so you can continue using your current workflow for running your application ("wooo!"). Basic usage is as follows:
 ```javascript
-if (require("piping")()) {
+if (require("piping2")()) {
   // application logic here
   express = require("express");
   app = express();
@@ -38,7 +38,7 @@ the function returned by piping also accepts an options object. The following op
 
 Example:
 ```javascript
-require("piping")({
+require("piping2")({
     main: "./app/server.js",
     hook: false,
     languages: ['babel-core/register', 'babel-polyfill']
@@ -46,14 +46,14 @@ require("piping")({
 ```
 Piping can also be used just by passing a string. In this case, the string is taken to be the "main" option:
 ```javascript
-if (require("piping")("./app/server.js")){
+if (require("piping2")("./app/server.js")){
   // app logic
 }
 ```
 One negative of all the examples above is the extra indent added to your code. To avoid this, you can choose to return when piping is false:
 
 ```javascript
-if (!require("piping")()) { return; }
+if (!require("piping2")()) { return; }
 // application logic here
 ```
 
